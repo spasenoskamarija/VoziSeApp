@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+  <meta charset="UTF-8">
+  <title>ВозиСе</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+      :root {
+          --brown: #B38B59;
+          --green: #4a9a61;
+          --light-gray: #F0F0F0;
+          --white: #FEFEFE;
+      }
+
+      body {
+          background-color: var(--light-gray);
+      }
+
+      .card {
+          position: relative;
+          width: 100%;
+          max-width: 300px;
+          height: 240px;
+          background-color: var(--white);
+          display: flex;
+          flex-direction: column;
+          justify-content: end;
+          align-items: center;
+          padding: 16px;
+          gap: 10px;
+          border-radius: 12px;
+          cursor: pointer;
+          color: var(--green);
+          margin: auto;
+      }
+
+      .card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          left: -5px;
+          margin: auto;
+          width: 310px;
+          height: 250px;
+          border-radius: 10px;
+          background: linear-gradient(-45deg, var(--green) 0%, var(--brown) 100%);
+          z-index: -10;
+          pointer-events: none;
+          transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .card::after {
+          content: "";
+          z-index: -1;
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(-45deg, var(--green) 0%, var(--brown) 100%);
+          transform: translate3d(0, 0, 0) scale(0.95);
+          filter: blur(20px);
+      }
+
+      .card:hover::after {
+          filter: blur(30px);
+      }
+
+      .card:hover::before {
+          transform: rotate(-180deg);
+      }
+
+      .heading {
+          font-size: 20px;
+          font-weight: 700;
+          color: var(--green);
+      }
+
+      .card p:not(.heading) {
+          font-size: 14px;
+          color: #333;
+      }
+
+      .card-img-top {
+          height: 60px;
+          width: 60px;
+          margin-top: 20px;
+          object-fit: contain;
+      }
+
+      h1 span {
+          color: var(--green);
+      }
+
+      @media (max-width: 768px) {
+          .card {
+              height: auto;
+          }
+      }
+  </style>
+</head>
+
+<body class="d-flex align-items-center justify-content-center flex-column text-center" style="min-height: 100vh;">
+<h1 class="fw-bold mb-4">Добредојде на <span>ВозиСе</span></h1>
+<p class="mb-4 fs-5">Избери како сакаш да патуваш:</p>
+
+<div class="row w-100 justify-content-center gy-4">
+  <!-- Возач -->
+  <div class="col-12 col-md-5 d-flex justify-content-center">
+    <div class="card" onclick="goTo('create-route.html', 'carSound')">
+      <img src="images/car.png" class="card-img-top" alt="Икона Возач">
+      <p class="heading">Јас сум Возач</p>
+      <p>Креирај рута и понуди превоз на други патници.</p>
+    </div>
+  </div>
+
+  <!-- Патник -->
+  <div class="col-12 col-md-5 d-flex justify-content-center">
+    <div class="card" onclick="goTo('search.html', 'walkSound')">
+      <img src="images/user.png" class="card-img-top" alt="Икона Патник">
+      <p class="heading">Јас сум Патник</p>
+      <p>Пребарај достапни рути и најди превоз брзо и лесно.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Звуци -->
+<audio id="carSound" src="inside-car-driving-24677.mp3"></audio>
+<audio id="walkSound" src="concrete-footsteps-6752.mp3"></audio>
+
+<script>
+  function goTo(url, soundId) {
+    const sound = document.getElementById(soundId);
+    sound.play();
+    setTimeout(() => {
+      window.location.href = url;
+    }, 2500);
+  }
+</script>
+
+<script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
